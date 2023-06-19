@@ -1,0 +1,14 @@
+{
+  "examplePerson1": {
+    "Instagram": ["InstagramProfile1", "InstagramProfile2"],
+    "Snapchat": ["SnapchatProfile1", "SnapchatProfile1"]
+  },
+    "examplePerson2": {
+    "Instagram": ["InstagramProfile1", "InstagramProfile2"],
+    "Snapchat": ["SnapchatProfile1", "SnapchatProfile1"]
+  },
+    "examplePerson3WithOnlyInstagram": {
+    "Instagram": ["InstagramProfile1"],
+    "Snapchat": [""]
+  }
+}
