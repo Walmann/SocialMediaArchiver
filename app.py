@@ -1,6 +1,6 @@
 import time
 import json
-import snapchat_dl  # https://pypi.org/project/snapchat-dl/
+import snapchat_dlp  # https://pypi.org/project/snapchat-dlp/
 
 # from vidstab import VidStab, layer_overlay #https://pypi.org/project/vidstab/
 import instaloader  # https://instaloader.github.io/as-module.html
@@ -18,7 +18,7 @@ DownloadFolerPrefix = "Output"
 
 def snapchatDownload(personName, SnapchatProfile):
     try:
-        snapper = snapchat_dl.SnapchatDL(
+        snapper = snapchat_dlp.SnapchatDL(
             max_workers=1,
             directory_prefix=f"{DownloadFolerPrefix}/{personName}/{SnapchatProfile}/Snapchat",
         )

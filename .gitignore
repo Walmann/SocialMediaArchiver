@@ -1,5 +1,5 @@
-myLoginInfo.json
-Profiles.json
-Output/
-.venv/
 __pycache__/
+.venv/
+myLoginInfo.json
+Output/
+Profiles.json
