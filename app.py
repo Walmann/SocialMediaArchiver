@@ -138,18 +138,18 @@ while True:
     # TODO add VSCO support, tise.com too?
     for profile in profileList:
         try:
-            if profileList[profile]["Snapchat"]:
-                for currentProfileFromFile in profileList[profile]["Snapchat"]:
-                    snapchatDownload(
-                        SnapchatProfile=currentProfileFromFile, personName=profile
-                    )
-        except KeyError as e:
-            pass
-        try:
             if profileList[profile]["Instagram"]:
                 for currentProfileFromFile in profileList[profile]["Instagram"]:
                     instagramDownload(
                         currentProfile=currentProfileFromFile, personName=profile
+                    )
+        except KeyError as e:
+            pass
+        try:
+            if profileList[profile]["Snapchat"]:
+                for currentProfileFromFile in profileList[profile]["Snapchat"]:
+                    snapchatDownload(
+                        SnapchatProfile=currentProfileFromFile, personName=profile
                     )
         except KeyError as e:
             pass
