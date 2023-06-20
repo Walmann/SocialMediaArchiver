@@ -52,7 +52,7 @@ def instagramDownload(currentProfile, personName):
             time.sleep(waittime)
             InstaGrabber = createInstagramSession()
             InstaGrabber.dirname_pattern = previousDir
-            createInstagramObject(InstaGrabber, triesLeft={triesLeft - 1})
+            createInstagramObject(InstaGrabber, triesLeft=triesLeft - 1)
 
     try:
         dirname_pattern_default = (
