@@ -29,13 +29,17 @@ def snapchatDownload(personName, SnapchatProfile):
 
 
 def instagramDownload(currentProfile, personName):
+
+
     def createInstagramSession():
         return instaloader.Instaloader()
         # return instaloader.Instaloader(
         #             dirname_pattern=dirname_pattern_default
         #         )
 
-    def createInstagramObject(InstaGrabber):
+    def createInstagramObject(InstaGrabber, triesLeft=5):
+        if triesLeft <= 0:
+            return
         try:
             previousDir = InstaGrabber.dirname_pattern
             InstaProfileOBJ = instaloader.Profile.from_username(
@@ -48,7 +52,7 @@ def instagramDownload(currentProfile, personName):
             time.sleep(waittime)
             InstaGrabber = createInstagramSession()
             InstaGrabber.dirname_pattern = previousDir
-            createInstagramObject(InstaGrabber)
+            createInstagramObject(InstaGrabber, triesLeft={triesLeft - 1})
 
     try:
         dirname_pattern_default = (
