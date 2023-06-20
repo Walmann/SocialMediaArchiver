@@ -79,7 +79,7 @@ def instagramDownload(currentProfile, personName):
                 ("igtv", True),
             ]
         else:  # If account is banned, only get public info
-            print("\n \033[93m Your Instagram user {InstagramLoginUser} has been banned or blocked! \033[0m " * 3)
+            print(f"\n \033[93m Your Instagram user {InstagramLoginUser} has been banned or blocked! \033[0m " * 3)
             InstaDownloadSettingsForLoop = [
                 ("posts", True),
                 ("profile_pic", True),
