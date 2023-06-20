@@ -88,8 +88,10 @@ def instagramDownload(currentProfile, personName):
             ]
 
         # Create Object with type Profile
-        InstaProfileOBJ, InstaGrabber = createInstagramObject(InstaGrabber)
-
+        try:
+            InstaProfileOBJ, InstaGrabber = createInstagramObject(InstaGrabber)
+        except TypeError as e:
+            return
         for settings in InstaDownloadSettingsForLoop:
             param_name, param_value = settings
             params = {
