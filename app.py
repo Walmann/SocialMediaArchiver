@@ -38,7 +38,7 @@ def instagramDownload(currentProfile, personName):
         #         )
 
     def createInstagramObject(InstaGrabber, triesLeft=5):
-        if triesLeft <= 0:
+        if int(triesLeft) <= 0:
             return
         try:
             previousDir = InstaGrabber.dirname_pattern
