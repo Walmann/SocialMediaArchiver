@@ -145,12 +145,16 @@ def instagramDownload(currentProfile, personName):
         instagramDownload(currentProfile, personName)
 
 
+
+import sys
+
 AccountBanned = []
+argument = sys.argv[1] if len(sys.argv) > 1 else None
+
 while True:
-    # TODO add VSCO support, tise.com too?
     for profile in profileList:
         try:
-            if profileList[profile]["Instagram"]:
+            if (not argument or argument == "Instagram") and profileList[profile]["Instagram"]:
                 for currentProfileFromFile in profileList[profile]["Instagram"]:
                     instagramDownload(
                         currentProfile=currentProfileFromFile, personName=profile
@@ -158,7 +162,7 @@ while True:
         except KeyError as e:
             pass
         try:
-            if profileList[profile]["Snapchat"]:
+            if (not argument or argument == "Snapchat") and profileList[profile]["Snapchat"]:
                 for currentProfileFromFile in profileList[profile]["Snapchat"]:
                     snapchatDownload(
                         SnapchatProfile=currentProfileFromFile, personName=profile
@@ -166,4 +170,28 @@ while True:
         except KeyError as e:
             pass
 
-    print()
+
+
+
+# AccountBanned = []
+# while True:
+#     # TODO add VSCO support, tise.com too?
+#     for profile in profileList:
+#         try:
+#             if profileList[profile]["Instagram"]:
+#                 for currentProfileFromFile in profileList[profile]["Instagram"]:
+#                     instagramDownload(
+#                         currentProfile=currentProfileFromFile, personName=profile
+#                     )
+#         except KeyError as e:
+#             pass
+#         try:
+#             if profileList[profile]["Snapchat"]:
+#                 for currentProfileFromFile in profileList[profile]["Snapchat"]:
+#                     snapchatDownload(
+#                         SnapchatProfile=currentProfileFromFile, personName=profile
+#                     )
+#         except KeyError as e:
+#             pass
+
+ 
