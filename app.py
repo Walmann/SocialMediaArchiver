@@ -37,7 +37,16 @@ def instagramDownload(currentProfile, personName):
         #             dirname_pattern=dirname_pattern_default
         #         )
 
-    def createInstagramObject(InstaGrabber, triesLeft=5):
+    def fetch_instagram_login():
+        # TODO Create support for multiple Useraccounts logins.
+        for user in loginList["Instagram"]:
+            if user["Banned"] == False:
+                return user
+
+        return None
+
+
+    def createInstagramObject(InstaGrabber, triesLeft=1):
         if int(triesLeft) <= 0:
             return
         try:
@@ -47,7 +56,7 @@ def instagramDownload(currentProfile, personName):
             )
             return InstaProfileOBJ, InstaGrabber
         except instaloader.exceptions.LoginRequiredException as e:
-            waittime = 60
+            waittime = 1
             ColorizeOutput.WARNING(f"Got Login screen. Waiting {waittime} seconds.")
             time.sleep(waittime)
             InstaGrabber = createInstagramSession()
@@ -63,13 +72,14 @@ def instagramDownload(currentProfile, personName):
 
         InstaGrabber = createInstagramSession()
         InstaGrabber.dirname_pattern = dirname_pattern_default
-
-        if "Instagram" not in AccountBanned:
-            # TODO Create support for multiple Useraccounts logins.
-            InstagramLoginUser = loginList["Instagram"]["User"]
+        
+        
+        instagram_login = fetch_instagram_login()
+        if instagram_login is not None:
+            InstagramLoginUser = fetch_instagram_login()
             InstaGrabber.login(
-                InstagramLoginUser, loginList["Instagram"]["Password"]
-            )
+                InstagramLoginUser["User"], InstagramLoginUser["Password"]
+                )
             InstaDownloadSettingsForLoop = [
                 ("highlights", True),
                 ("stories", True),
