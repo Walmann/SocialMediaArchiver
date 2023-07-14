@@ -1,0 +1,53 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Test Insta Login",
+            "type": "python",
+            "request": "launch",
+            "program": "appCopy.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": ["-I", "-ilogin"]
+        },
+        {
+            "name": "Test Insta Public",
+            "type": "python",
+            "request": "launch",
+            "program": "appCopy.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["-I", "-ip"]
+        },
+        {
+            "name": "VSCO Public",
+            "type": "python",
+            "request": "launch",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": ["-vsco", "-r", "-t"]
+        },
+        {
+            "name": "Insta Login",
+            "type": "python",
+            "request": "launch",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": ["-I", "-ilogin"]
+        },
+        {
+            "name": " Insta Public",
+            "type": "python",
+            "request": "launch",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["-I", "-ip"]
+        }
+    ]
+}
