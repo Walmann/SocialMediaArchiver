@@ -17,7 +17,7 @@ from colorizeOutput import ColorizeOutput
 profileList = json.load(open("Profiles.json", "r"))
 loginList = json.load(open("myLoginInfo.json", "r"))
 
-DownloadFolerPrefix = "Output"
+DownloadFolerPrefix = "./Output"
 InstaDownloadSettingsForLoop = {}
 # TODO Create a way to collect TODO's written inside files into README.MD
 
@@ -213,6 +213,8 @@ def instagramDownload(currentProfile, personName, mode, resyncDownloads):
 
 
 def vscoDownload(vscoProfile, personName):
+
+    # outputPath = os.path.abspath(os.path.join(DownloadFolerPrefix,personName,vscoProfile, 'VSCO'))
     outputPath = f"{DownloadFolerPrefix}/{personName}/{vscoProfile}/VSCO"
     vscoDownloader = vscodl.Scraper(username=vscoProfile,  output_dir=outputPath)
     # vscoDownloader = vscodl()
@@ -251,6 +253,7 @@ def download_vsco_profiles(profile_list):
     for profile, details in profile_list.items():
         try:
             for current_profile in details["VSCO"]:
+                os.chdir(working_dir)
                 vscoDownload(vscoProfile=current_profile, personName=profile)
         except KeyError:
             pass
@@ -334,7 +337,10 @@ def main():
         time.sleep(repeat_downloads_wait_time)
         main()
 
-
+working_dir = None
+if working_dir == None:
+    working_dir = os.getcwd()
+os.chdir(working_dir)
 if __name__ == "__main__":
     main()
 
