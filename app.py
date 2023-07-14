@@ -330,6 +330,7 @@ def main():
         download_vsco_profiles(profileList)
 
     if repeat_downloads:
+        print(f"\nWaiting {repeat_downloads_wait_time} before repeating")
         time.sleep(repeat_downloads_wait_time)
         main()
 
