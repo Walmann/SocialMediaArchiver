@@ -225,6 +225,7 @@ def vscoDownload(vscoProfile, personName):
 
 
 def download_instagram_profiles(profile_list, mode, resyncDownloads):
+    repeat_downloads_wait_time_instagram = repeat_downloads_wait_time /2
     for profile, details in profile_list.items():
         try:
             ColorizeOutput.OKGREEN(
@@ -237,6 +238,8 @@ def download_instagram_profiles(profile_list, mode, resyncDownloads):
                     mode=mode,
                     resyncDownloads=resyncDownloads,
                 )
+            ColorizeOutput.WARNING(f"\nWaiting {repeat_downloads_wait_time_instagram} seconds before repeating. This is needed for the instagram rate limiter.")
+            time.sleep(repeat_downloads_wait_time)
         except KeyError:
             pass
 
