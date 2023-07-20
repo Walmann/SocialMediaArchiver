@@ -262,83 +262,91 @@ def download_vsco_profiles(profile_list):
             pass
 
 
+repeat_downloads_wait_time = 60
 def main():
-    repeat_downloads = False
-    resyncDownloads = False
-    repeat_downloads_wait_time = 60
-    parser = argparse.ArgumentParser(
-        description="Download profiles from Instagram and Snapchat."
-    )
-    parser.add_argument(
-        "-S", action="store_true", help="Download Snapchat profiles from public users"
-    )
-    parser.add_argument(
-        "-I",
-        action="store_true",
-        help="Download Instagram profiles, must be used together with -ip or -ilogin",
-    )
-    parser.add_argument(
-        "-ip",
-        action="store_true",
-        help="Download Instagram profiles with a public user",
-    )
-    parser.add_argument(
-        "-ilogin",
-        action="store_true",
-        help="Download Instagram profiles with a logged-in user",
-    )
-    parser.add_argument(
-        "-iresync",
-        action="store_true",
-        help="Deactivate fast_update. Do not about current download even if download already exists.",
-    )
-    parser.add_argument(
-        "-r",
-        type=int,
-        nargs="?",
-        const=-1,
-        help="Repeat the script. Do '-r int' to set the number of times it shall repeat.",
-    )
-    parser.add_argument(
-        "-t",
-        type=int,
-        nargs="?",
-        const=repeat_downloads_wait_time,
-        help="Used with -r to set a waittime for the repeat. Default is 60 seconds",
-    )
-    parser.add_argument(
-        "-vsco",
-        action="store_true",
-        help="Download VSCO profiles with a public user",
-    )
-    args = parser.parse_args()
+    repeatLoop = True
+    while repeatLoop:
+        global repeat_downloads_wait_time
+        repeat_downloads_wait_time = 60
+        repeat_downloads = False
+        resyncDownloads = False
+        parser = argparse.ArgumentParser(
+            description="Download profiles from Instagram and Snapchat."
+        )
+        parser.add_argument(
+            "-S", action="store_true", help="Download Snapchat profiles from public users"
+        )
+        parser.add_argument(
+            "-I",
+            action="store_true",
+            help="Download Instagram profiles, must be used together with -ip or -ilogin",
+        )
+        parser.add_argument(
+            "-ip",
+            action="store_true",
+            help="Download Instagram profiles with a public user",
+        )
+        parser.add_argument(
+            "-ilogin",
+            action="store_true",
+            help="Download Instagram profiles with a logged-in user",
+        )
+        parser.add_argument(
+            "-iresync",
+            action="store_true",
+            help="Deactivate fast_update. Do not about current download even if download already exists.",
+        )
+        parser.add_argument(
+            "-r",
+            type=int,
+            nargs="?",
+            const=-1,
+            help="Repeat the script. Do '-r int' to set the number of times it shall repeat.",
+        )
+        parser.add_argument(
+            "-t",
+            type=int,
+            nargs="?",
+            const=repeat_downloads_wait_time,
+            help="Used with -r to set a waittime for the repeat. Default is 60 seconds",
+        )
+        parser.add_argument(
+            "-vsco",
+            action="store_true",
+            help="Download VSCO profiles with a public user",
+        )
+        args = parser.parse_args()
 
-    if args.I and not (args.ip or args.ilogin) and not args.S:
-        print("You need to pass either -ip or -ilogin to run Instagram download")
-        sys.exit(1)
+        if args.I and not (args.ip or args.ilogin) and not args.S:
+            print("You need to pass either -ip or -ilogin to run Instagram download")
+            sys.exit(1)
 
-    if args.iresync:
-        resyncDownloads = True
+        if args.iresync:
+            resyncDownloads = True
 
-    if args.r:
-        repeat_downloads = True
 
-    if args.t:
-        repeat_downloads_wait_time = args.t
 
-    instagram_mode = "public" if args.ip else "logged_in"
+        if args.t:
+            repeat_downloads_wait_time = args.t
 
-    if args.I:
-        download_instagram_profiles(profileList, instagram_mode, resyncDownloads)
-    if args.S:
-        download_snapchat_profiles(profileList)
-    if args.vsco:
-        download_vsco_profiles(profileList)
+        instagram_mode = "public" if args.ip else "logged_in"
 
-    if repeat_downloads:
+        if args.I:
+            download_instagram_profiles(profileList, instagram_mode, resyncDownloads)
+        if args.S:
+            download_snapchat_profiles(profileList)
+        if args.vsco:
+            download_vsco_profiles(profileList)
+
+        # if not repeat_downloads:
+        #     exit()
+
+        if not args.r:
+            repeat_downloads = False
+
         print(f"\nWaiting {repeat_downloads_wait_time} before repeating")
         time.sleep(repeat_downloads_wait_time)
-        main()
+        # main()
 
 working_dir = None
 if working_dir == None:
